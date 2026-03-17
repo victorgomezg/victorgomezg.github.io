@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portafolio | Data Analyst</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Syne:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ── VARIABLES ── */
+    :root {
+      --bg:       #0a0b0e;
+      --surface:  #111318;
+      --surface2: #181b22;
+      --border:   rgba(255,255,255,0.07);
+      --accent:   #00e5a0;
+      --accent2:  #4d9fff;
+      --accent3:  #ff6b4a;
+      --text:     #e8eaf0;
+      --muted:    #6b7080;
+      --mono:     'IBM Plex Mono', monospace;
+      --sans:     'Syne', sans-serif;
+    }
+
+    /* ── RESET ── */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      line-height: 1.6;
+    }
+
+    /* ── LAYOUT ── */
+    .portfolio {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 6rem;
+    }
+
+    /* ── NAV ── */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.5rem 0 1.5rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 3.5rem;
+      position: sticky;
+      top: 0;
+      background: var(--bg);
+      z-index: 100;
+    }
+    .logo {
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+    }
+    .nav-links { display: flex; gap: 2rem; }
+    .nav-links a {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover,
+    .nav-links a.active { color: var(--accent); }
+
+    /* ── SECTION LABEL ── */
+    .section-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.15em;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── SECTION SPACING ── */
+    .section { margin-bottom: 4rem; }
+
+    /* ── HERO ── */
+    .hero { margin-bottom: 4rem; }
+    .hero-tag {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .hero-tag::before {
+      content: '';
+      width: 24px;
+      height: 1px;
+      background: var(--accent);
+    }
+    h1 {
+      font-size: clamp(2.4rem, 5.5vw, 3.8rem);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+    h1 span { color: var(--accent); }
+    .hero-sub {
+      font-size: 15px;
+      color: var(--muted);
+      max-width: 520px;
+      line-height: 1.75;
+      margin-bottom: 2rem;
+    }
+    .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+
+    /* ── BUTTONS ── */
+    .btn-primary {
+      background: var(--accent);
+      color: #0a0b0e;
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 500;
+      padding: 11px 24px;
+      border: none;
+      cursor: pointer;
+      letter-spacing: 0.08em;
+      transition: opacity 0.2s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .btn-primary:hover { opacity: 0.82; }
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+      font-family: var(--mono);
+      font-size: 12px;
+      padding: 11px 24px;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      letter-spacing: 0.08em;
+      transition: border-color 0.2s, color 0.2s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ── KPI GRID ── */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      margin-bottom: 4rem;
+    }
+    .kpi-card {
+      background: var(--surface);
+      padding: 1.75rem 1.5rem;
+    }
+    .kpi-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 0.12em;
+      margin-bottom: 0.75rem;
+    }
+    .kpi-value {
+      font-size: 2.25rem;
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+    .kpi-value.green  { color: var(--accent); }
+    .kpi-value.blue   { color: var(--accent2); }
+    .kpi-value.orange { color: var(--accent3); }
+    .kpi-delta {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+    }
+    .kpi-delta.up { color: var(--accent); }
+
+    /* ── PROJECTS ── */
+    .projects-col-header {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      margin-bottom: 1px;
+    }
+    .col-header {
+      background: var(--surface2);
+      padding: 0.75rem 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .col-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .col-dot.py  { background: var(--accent2); }
+    .col-dot.sql { background: var(--accent3); }
+    .col-dot.bi  { background: var(--accent); }
+    .col-title { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; }
+    .col-title.py  { color: var(--accent2); }
+    .col-title.sql { color: var(--accent3); }
+    .col-title.bi  { color: var(--accent); }
+
+    .projects-cols {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+    }
+    .proj-col {
+      background: var(--surface);
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+
+    /* ── PROJECT CARD ── */
+    .project-card {
+      background: var(--surface);
+      overflow: hidden;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .project-card:hover { background: var(--surface2); }
+
+    /* Visualization area — replace iframe src with your real embed URL */
+    .card-viz {
+      position: relative;
+      height: 200px;
+      background: var(--surface2);
+      overflow: hidden;
+      border-bottom: 1px solid var(--border);
+    }
+    .card-viz iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+    /* Placeholder shown when no iframe is set */
+    .viz-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .viz-placeholder .ph-icon {
+      font-family: var(--mono);
+      font-size: 22px;
+      color: var(--muted);
+      opacity: 0.4;
+    }
+    .viz-placeholder .ph-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      opacity: 0.5;
+    }
+    .viz-placeholder .ph-hint {
+      font-family: var(--mono);
+      font-size: 9px;
+      color: var(--muted);
+      opacity: 0.35;
+      text-align: center;
+      max-width: 160px;
+      line-height: 1.5;
+    }
+
+    .card-info { padding: 1.25rem; }
+    .card-tag {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      padding: 3px 10px;
+      border: 1px solid;
+      display: inline-block;
+      margin-bottom: 0.75rem;
+    }
+    .tag-py  { color: var(--accent2); border-color: rgba(77,159,255,0.3); }
+    .tag-sql { color: var(--accent3); border-color: rgba(255,107,74,0.3); }
+    .tag-bi  { color: var(--accent);  border-color: rgba(0,229,160,0.3); }
+
+    .card-title {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+      line-height: 1.3;
+    }
+    .card-desc {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.65;
+      margin-bottom: 1rem;
+    }
+    .card-metrics { display: flex; gap: 1.25rem; flex-wrap: wrap; }
+    .metric { font-family: var(--mono); font-size: 11px; }
+    .metric-val { color: var(--text); font-weight: 500; }
+    .metric-lbl { color: var(--muted); }
+
+    /* ── SKILLS ── */
+    .skills-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .skill-chip {
+      font-family: var(--mono);
+      font-size: 11px;
+      padding: 6px 14px;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .skill-chip:hover { border-color: var(--accent); color: var(--accent); }
+    .skill-chip.highlight {
+      border-color: rgba(0,229,160,0.35);
+      color: var(--accent);
+    }
+
+    /* ── CONTACT ── */
+    .contact-row {
+      display: flex;
+      gap: 1px;
+      background: var(--border);
+      flex-wrap: wrap;
+    }
+    .contact-block {
+      flex: 1;
+      min-width: 160px;
+      background: var(--surface);
+      padding: 1.5rem 1.25rem;
+    }
+    .contact-block h3 {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .contact-block a {
+      color: var(--accent);
+      text-decoration: none;
+      font-family: var(--mono);
+      font-size: 12px;
+    }
+    .contact-block a:hover { text-decoration: underline; }
+    .contact-block p {
+      font-family: var(--mono);
+      font-size: 12px;
+    }
+    .available { color: var(--accent) !important; }
+
+    /* ── FOOTER ── */
+    footer {
+      margin-top: 5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    footer p {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+    }
+    footer span { color: var(--accent); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 700px) {
+      .kpi-grid { grid-template-columns: 1fr 1fr; }
+      .projects-col-header,
+      .projects-cols { grid-template-columns: 1fr; }
+      .nav-links { gap: 1rem; }
+    }
+    @media (max-width: 420px) {
+      .kpi-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="portfolio">
+
+  <!-- ── NAV ── -->
+  <nav>
+    <div class="logo">[ PORTAFOLIO.2025 ]</div>
+    <div class="nav-links">
+      <a href="#bio"       class="active">bio</a>
+      <a href="#proyectos">proyectos</a>
+      <a href="#skills">skills</a>
+      <a href="#contacto">contacto</a>
+    </div>
+  </nav>
+
+  <!-- ── BIO / HERO ── -->
+  <section id="bio" class="hero">
+    <div class="hero-tag">DATA ANALYST</div>
+    <!-- ✏️ Cambia el nombre y descripción -->
+    <h1>Transformo datos<br>en <span>decisiones</span></h1>
+    <p class="hero-sub">
+      Especialista en análisis de datos con enfoque en visualización, modelado
+      estadístico y generación de insights accionables para equipos de negocio.
+    </p>
+    <div class="hero-btns">
+      <a href="#proyectos" class="btn-primary">Ver proyectos</a>
+      <!-- ✏️ Cambia el href por la ruta a tu CV PDF -->
+      <a href="assets/cv.pdf" download class="btn-secondary">Descargar CV</a>
+    </div>
+  </section>
+
+  <!-- ── KPI METRICS ── -->
+  <div class="section-label">MÉTRICAS GLOBALES</div>
+  <div class="kpi-grid">
+    <!-- ✏️ Cambia data-target por tus cifras reales -->
+    <div class="kpi-card">
+      <div class="kpi-label">PROYECTOS COMPLETADOS</div>
+      <div class="kpi-value green" data-target="24" data-suffix="">0</div>
+      <div class="kpi-delta up">↑ +6 este año</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">DATASETS PROCESADOS</div>
+      <div class="kpi-value blue" data-target="180" data-suffix="M">0</div>
+      <div class="kpi-delta">filas analizadas</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">DASHBOARDS ENTREGADOS</div>
+      <div class="kpi-value green" data-target="41" data-suffix="">0</div>
+      <div class="kpi-delta">en producción</div>
+    </div>
+  </div>
+
+  <!-- ── PROJECTS ── -->
+  <section id="proyectos" class="section">
+    <div class="section-label">PROYECTOS DESTACADOS</div>
+
+    <div class="projects-col-header">
+      <div class="col-header">
+        <div class="col-dot sql"></div>
+        <span class="col-title sql">SQL</span>
+      </div>
+      <div class="col-header">
+        <div class="col-dot py"></div>
+        <span class="col-title py">PYTHON</span>
+      </div>
+      <div class="col-header">
+        <div class="col-dot bi"></div>
+        <span class="col-title bi">POWER BI</span>
+      </div>
+    </div>
+
+    <div class="projects-cols">
+
+      <!-- ── COLUMNA SQL ── -->
+      <div class="proj-col">
+
+        <div class="project-card">
+          <div class="card-viz">
+            <!--
+              ✏️ OPCIÓN A — Plotly HTML exportado:
+              <iframe src="assets/sql_queries.html"></iframe>
+
+              ✏️ OPCIÓN B — Imagen estática:
+              <img src="assets/sql_queries.png" style="width:100%;height:100%;object-fit:cover;" />
+
+              Mientras no tengas el archivo, el placeholder de abajo se muestra.
+            -->
+            <div class="viz-placeholder">
+              <span class="ph-icon">{ }</span>
+              <span class="ph-label">VISUALIZACIÓN SQL</span>
+              <span class="ph-hint">Reemplaza este bloque con tu iframe o imagen</span>
+            </div>
+          </div>
+          <div class="card-info">
+            <span class="card-tag tag-sql">SQL</span>
+            <!-- ✏️ Edita título, descripción y métricas -->
+            <div class="card-title">Optimización de queries ERP</div>
+            <p class="card-desc">Reingeniería de consultas críticas en base de datos financiera. Tiempo de respuesta mejorado de 4 min a 8 seg.</p>
+            <div class="card-metrics">
+              <div class="metric"><span class="metric-val">97%</span> <span class="metric-lbl">más rápido</span></div>
+              <div class="metric"><span class="metric-val">3</span> <span class="metric-lbl">tablas rediseñadas</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="card-viz">
+            <div class="viz-placeholder">
+              <span class="ph-icon">{ }</span>
+              <span class="ph-label">VISUALIZACIÓN SQL</span>
+              <span class="ph-hint">Reemplaza este bloque con tu iframe o imagen</span>
+            </div>
+          </div>
+          <div class="card-info">
+            <span class="card-tag tag-sql">SQL + ETL</span>
+            <div class="card-title">Pipeline data warehouse</div>
+            <p class="card-desc">Ingesta y transformación de datos operativos desde múltiples fuentes hacia repositorio centralizado.</p>
+            <div class="card-metrics">
+              <div class="metric"><span class="metric-val">5</span> <span class="metric-lbl">fuentes</span></div>
+              <div class="metric"><span class="metric-val">diario</span> <span class="metric-lbl">frecuencia</span></div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /col SQL -->
+
+      <!-- ── COLUMNA PYTHON ── -->
+      <div class="proj-col">
+
+        <div class="project-card">
+          <div class="card-viz">
+            <!--
+              ✏️ Plotly — exporta con: fig.write_html("assets/churn.html")
+              <iframe src="assets/churn.html"></iframe>
+            -->
+            <div class="viz-placeholder">
+              <span class="ph-icon">⬡</span>
+              <span class="ph-label">PLOTLY INTERACTIVO</span>
+              <span class="ph-hint">fig.write_html("assets/churn.html")</span>
+            </div>
+          </div>
+          <div class="card-info">
+            <span class="card-tag tag-py">PYTHON</span>
+            <div class="card-title">Modelo de churn predictivo</div>
+            <p class="card-desc">Pipeline de ML para predecir abandono de clientes en retail. Reducción del 28% en tasa de churn tras implementación.</p>
+            <div class="card-metrics">
+              <div class="metric"><span class="metric-val">92%</span> <span class="metric-lbl">accuracy</span></div>
+              <div class="metric"><span class="metric-val">50K</span> <span class="metric-lbl">registros</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="card-viz">
+            <!--
+              ✏️ <iframe src="assets/rfm.html"></iframe>
+            -->
+            <div class="viz-placeholder">
+              <span class="ph-icon">⬡</span>
+              <span class="ph-label">PLOTLY INTERACTIVO</span>
+              <span class="ph-hint">fig.write_html("assets/rfm.html")</span>
+            </div>
+          </div>
+          <div class="card-info">
+            <span class="card-tag tag-py">PYTHON</span>
+            <div class="card-title">Segmentación RFM</div>
+            <p class="card-desc">Clustering K-Means sobre métricas de recencia, frecuencia y valor monetario para segmentar base de clientes.</p>
+            <div class="card-metrics">
+              <div class="metric"><span class="metric-val">6</span> <span class="metric-lbl">segmentos</span></div>
+              <div class="metric"><span class="metric-val">120K</span> <span class="metric-lbl">clientes</span></div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /col Python -->
+
+      <!-- ── COLUMNA POWER BI ── -->
+      <div class="proj-col">
+
+        <div class="project-card">
+          <div class="card-viz">
+            <!--
+              ✏️ Power BI embed — ve a Power BI Service:
+              Archivo → Insertar informe → Publicar en web (público)
+              Copia la URL del src y pégala abajo:
+
+              <iframe
+                src="https://app.powerbi.com/view?r=TU_CODIGO_AQUI"
+                allowFullScreen>
+              </iframe>
+            -->
+            <div class="viz-placeholder">
+              <span class="ph-icon">▦</span>
+              <span class="ph-label">POWER BI EMBED</span>
+              <span class="ph-hint">Publica en web y pega el iframe aquí</span>
+            </div>
+          </div>
+          <div class="card-info">
+            <span class="card-tag tag-bi">POWER BI</span>
+            <div class="card-title">Dashboard ejecutivo ventas</div>
+            <p class="card-desc">Suite de reportes para C-level con KPIs en tiempo real. Integración con SAP y fuentes externas de mercado.</p>
+            <div class="card-metrics">
+              <div class="metric"><span class="metric-val">8</span> <span class="metric-lbl">reportes</span></div>
+              <div class="metric"><span class="metric-val">12</span> <span class="metric-lbl">usuarios activos</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="card-viz">
+            <!--
+              ✏️ <iframe src="https://app.powerbi.com/view?r=TU_CODIGO_AQUI" allowFullScreen></iframe>
+            -->
+            <div class="viz-placeholder">
+              <span class="ph-icon">▦</span>
+              <span class="ph-label">TABLEAU / POWER BI</span>
+              <span class="ph-hint">Publica en web y pega el iframe aquí</span>
+            </div>
+          </div>
+          <div class="card-info">
+            <span class="card-tag tag-bi">TABLEAU</span>
+            <div class="card-title">Visualización supply chain</div>
+            <p class="card-desc">Mapa interactivo de rutas y tiempos de entrega. Identificación de cuellos de botella y rutas alternativas.</p>
+            <div class="card-metrics">
+              <div class="metric"><span class="metric-val">18%</span> <span class="metric-lbl">ahorro logístico</span></div>
+              <div class="metric"><span class="metric-val">4</span> <span class="metric-lbl">regiones</span></div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /col Power BI -->
+
+    </div><!-- /projects-cols -->
+  </section>
+
+  <!-- ── SKILLS ── -->
+  <section id="skills" class="section">
+    <div class="section-label">STACK TECNOLÓGICO</div>
+    <!-- ✏️ Agrega o quita chips según tu stack real -->
+    <div class="skills-grid">
+      <span class="skill-chip highlight">Python</span>
+      <span class="skill-chip highlight">Pandas</span>
+      <span class="skill-chip highlight">Matplotlib</span>
+      <span class="skill-chip highlight">Plotly</span>
+      <span class="skill-chip">Scikit-learn</span>
+      <span class="skill-chip">NumPy</span>
+      <span class="skill-chip highlight">SQL</span>
+      <span class="skill-chip">PostgreSQL</span>
+      <span class="skill-chip">MySQL</span>
+      <span class="skill-chip">BigQuery</span>
+      <span class="skill-chip highlight">Power BI</span>
+      <span class="skill-chip highlight">Tableau</span>
+      <span class="skill-chip">DAX</span>
+      <span class="skill-chip">Excel avanzado</span>
+      <span class="skill-chip">Git</span>
+      <span class="skill-chip">Jupyter</span>
+      <span class="skill-chip">Estadística</span>
+      <span class="skill-chip">Machine Learning</span>
+      <span class="skill-chip">ETL</span>
+    </div>
+  </section>
+
+  <!-- ── CONTACT ── -->
+  <section id="contacto" class="section">
+    <div class="section-label">CONTACTO</div>
+    <div class="contact-row">
+      <div class="contact-block">
+        <h3>Email</h3>
+        <!-- ✏️ Cambia el href y el texto -->
+        <a href="mailto:tu@email.com">tu@email.com</a>
+      </div>
+      <div class="contact-block">
+        <h3>LinkedIn</h3>
+        <a href="https://linkedin.com/in/tu-perfil" target="_blank" rel="noopener">/in/tu-perfil</a>
+      </div>
+      <div class="contact-block">
+        <h3>GitHub</h3>
+        <a href="https://github.com/tu-usuario" target="_blank" rel="noopener">/tu-usuario</a>
+      </div>
+      <div class="contact-block">
+        <h3>Disponibilidad</h3>
+        <p class="available">Abierto a proyectos</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <p>[ PORTAFOLIO.2025 ] — Hecho con <span>HTML + CSS + JS</span> puro</p>
+    <p>Desplegado en <span>GitHub Pages</span></p>
+  </footer>
+
+</div><!-- /portfolio -->
+
+<!-- ── SCRIPTS ── -->
+<script>
+  /* ── NAV ACTIVE ON SCROLL ── */
+  const sections = document.querySelectorAll('section[id], div[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(a => {
+          a.classList.toggle('active', a.getAttribute('href') === '#' + entry.target.id);
+        });
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+
+  sections.forEach(s => observer.observe(s));
+
+  /* ── KPI COUNTER ANIMATION ── */
+  function animateCounter(el) {
+    const target = parseInt(el.dataset.target, 10);
+    const suffix = el.dataset.suffix || '';
+    const duration = 1400;
+    const steps = 50;
+    const interval = duration / steps;
+    let current = 0;
+    const increment = target / steps;
+    const timer = setInterval(() => {
+      current += increment;
+      if (current >= target) {
+        current = target;
+        clearInterval(timer);
+      }
+      el.textContent = Math.round(current) + suffix;
+    }, interval);
+  }
+
+  const kpiObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateCounter(entry.target);
+        kpiObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.4 });
+
+  document.querySelectorAll('.kpi-value[data-target]').forEach(el => kpiObserver.observe(el));
+</script>
+
+</body>
+</html>
